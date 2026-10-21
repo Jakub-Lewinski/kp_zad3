@@ -33,6 +33,11 @@ def create_parser():
 def main():
   parser = create_parser()
   args = parser.parse_args()
+  if len(args.zakresy) != len(args.months):
+    parser.error("number of zakresy != number of miesiące")
+  number_of_days = sum(len(zakres) for zakres in args.zakresy)
+  if len(args.pory) != number_of_days:
+    parser.error(f"number of pory ({len(args.pory)}) != number of days ({number_of_days})")
 
   print(args)
 
